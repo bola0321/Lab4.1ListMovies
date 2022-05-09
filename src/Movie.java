@@ -1,21 +1,48 @@
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Movie {
 	private String title;
 	private String category;
-	
-	public Movie (String title, String category) {
+
+	public Movie(String title, String category) {
 		this.setTitle(title);
 		this.setCategory(category);
 	}
 
 	public static void main(String[] args) {
-		
+
+		ArrayList<Movie> movieList = new ArrayList<>();
+		for (int i = 1; i <= 100; i++) {
+			movieList.add(getMovieForList(i));
+		}
+
+		Scanner scnr = new Scanner(System.in);
+		int userEntry;
+		String yesNo;
+		boolean loopAgain = true;
+
 		System.out.println("Welcome to the Movie List Application!" + "\n");
 		System.out.println("There are 100 movies in this list.");
-		System.out.print("What category are you interested in? ");
-	//TODO: grab movie list from GrandCircus Github, for loop to iterate through movie list
-	//(loop located in exercise Car from 5/5/22 lecture
-	// switch block using numbers rather than entering name for movie selection
+
+		// loop here
+
+		do {
+			menu();
+			userEntry = scnr.nextInt();
+			scnr.nextLine();
+			theSwitch(userEntry, movieList);
+
+			if (userEntry < 1 || userEntry > 6) {
+				continue;
+			}
+
+			loopAgain = getYesNo("\n" + "Continue? (y/n): ", scnr);
+
+		} while (loopAgain == true);
+		
+	System.out.println("Thank you for using the Movie List!");
+	scnr.close();
 
 	}
 
@@ -33,6 +60,274 @@ public class Movie {
 
 	public void setCategory(String category) {
 		this.category = category;
+	}
+
+	public static void menu() {
+		System.out.println("Please select the number that relates to the movie category you are interested in.");
+		System.out.println("1. Comedy");
+		System.out.println("2. Sci-Fi");
+		System.out.println("3. Animated");
+		System.out.println("4. Drama");
+		System.out.println("5. Musical");
+		System.out.println("6. Horror");
+	}
+	
+	public static boolean getYesNo(String prompt,Scanner scan) {
+		do {
+			System.out.print(prompt);
+			String userInput = scan.nextLine();
+			if (!userInput.equals("y") && !userInput.equals("n")) {
+				continue;
+			}else if (userInput.equals("y")) {
+				return true;
+			}else if (userInput.equals("n")) {
+				return false;
+			}
+			
+		} while(true);
+	
+	}
+
+	public static void theSwitch(int x, ArrayList<Movie> aMovieList) {
+		switch (x) {
+		case 1:
+			findMovie(aMovieList, "comedy");
+			break;
+		case 2:
+			findMovie(aMovieList, "scifi");
+			break;
+		case 3:
+			findMovie(aMovieList, "animated");
+			break;
+		case 4:
+			findMovie(aMovieList, "drama");
+			break;
+		case 5:
+			findMovie(aMovieList, "musical");
+			break;
+		case 6:
+			findMovie(aMovieList, "horror");
+			break;
+		default:
+			System.out.println("Please input valid number");
+			break;
+		}
+	}
+
+	public static void findMovie(ArrayList<Movie> movieList, String category) {
+
+		for (Movie movie : movieList) {
+			if (movie.getCategory().equals(category)) {
+				System.out.println(movie.getTitle());
+			}
+		}
+	}
+
+	public static Movie getMovieForList(int index) {
+		switch (index) {
+		case 1:
+			return new Movie("Citizen Kane", "drama");
+		case 2:
+			return new Movie("Casablanca", "drama");
+		case 3:
+			return new Movie("The Godfather", "drama");
+		case 4:
+			return new Movie("Gone With The Wind", "drama");
+		case 5:
+			return new Movie("Lawrence Of Arabia", "drama");
+		case 6:
+			return new Movie("The Wizard Of Oz", "musical");
+		case 7:
+			return new Movie("The Graduate", "drama");
+		case 8:
+			return new Movie("On The Waterfront", "drama");
+		case 9:
+			return new Movie("Schindler's List", "drama");
+		case 10:
+			return new Movie("Singin' In The Rain", "musical");
+		case 11:
+			return new Movie("It's A Wonderful Life", "drama");
+		case 12:
+			return new Movie("Sunset Boulevard", "drama");
+		case 13:
+			return new Movie("The Bridge On The River Kwai", "drama");
+		case 14:
+			return new Movie("Some Like It Hot", "drama");
+		case 15:
+			return new Movie("Star Wars", "scifi");
+		case 16:
+			return new Movie("All About Eve", "drama");
+		case 17:
+			return new Movie("The African Queen", "drama");
+		case 18:
+			return new Movie("Psycho", "horror");
+		case 19:
+			return new Movie("Chinatown", "drama");
+		case 20:
+			return new Movie("One Flew Over The Cuckoo's Nest", "drama");
+		case 21:
+			return new Movie("The Grapes Of Wrath", "drama");
+		case 22:
+			return new Movie("2001: A Space Odyssey", "scifi");
+		case 23:
+			return new Movie("The Maltese Falcon", "drama");
+		case 24:
+			return new Movie("Raging Bull", "drama");
+		case 25:
+			return new Movie("E.T. The extra-terrestrial", "scifi");
+		case 26:
+			return new Movie("Dr. Strangelove", "drama");
+		case 27:
+			return new Movie("Bonnie And Clyde", "drama");
+		case 28:
+			return new Movie("Apocalypse Now", "drama");
+		case 29:
+			return new Movie("Mr. Smith Goes to Washington", "drama");
+		case 30:
+			return new Movie("The Treasure Of The Sierra Madre", "drama");
+		case 31:
+			return new Movie("Annie Hall", "comedy");
+		case 32:
+			return new Movie("The Godfather Part II", "drama");
+		case 33:
+			return new Movie("High Noon", "drama");
+		case 34:
+			return new Movie("To Kill A Mockingbird", "drama");
+		case 35:
+			return new Movie("It Happened One Night", "drama");
+		case 36:
+			return new Movie("Midnight Cowboy", "drama");
+		case 37:
+			return new Movie("The Best Years Of Our Lives", "drama");
+		case 38:
+			return new Movie("Double Indemnity", "drama");
+		case 39:
+			return new Movie("Doctor Zhivago", "drama");
+		case 40:
+			return new Movie("North By Northwest", "drama");
+		case 41:
+			return new Movie("West Side Story", "musical");
+		case 42:
+			return new Movie("Rear Window", "drama");
+		case 43:
+			return new Movie("King Kong", "horror");
+		case 44:
+			return new Movie("The Birth Of A Nation", "drama");
+		case 45:
+			return new Movie("A Streetcar Named Desire", "drama");
+		case 46:
+			return new Movie("A Clockwork Orange", "scifi");
+		case 47:
+			return new Movie("Taxi Driver", "drama");
+		case 48:
+			return new Movie("Jaws", "horror");
+		case 49:
+			return new Movie("Snow White And The Seven Dwarfs", "animated");
+		case 50:
+			return new Movie("Butch Cassidy And The Sundance Kid", "drama");
+		case 51:
+			return new Movie("The Philadelphia Story", "drama");
+		case 52:
+			return new Movie("From Here To Eternity", "drama");
+		case 53:
+			return new Movie("Amadeus", "drama");
+		case 54:
+			return new Movie("All Quiet On The Western Front", "drama");
+		case 55:
+			return new Movie("The Sound Of Music", "musical");
+		case 56:
+			return new Movie("M*A*S*H", "comedy");
+		case 57:
+			return new Movie("The Third Man", "drama");
+		case 58:
+			return new Movie("Fantasia", "animated");
+		case 59:
+			return new Movie("Rebel Without A Cause", "drama");
+		case 60:
+			return new Movie("Raiders Of The Lost Ark", "drama");
+		case 61:
+			return new Movie("Vertigo", "drama");
+		case 62:
+			return new Movie("Tootsie", "comedy");
+		case 63:
+			return new Movie("Stagecoach", "drama");
+		case 64:
+			return new Movie("Close Encounters Of The Third Kind", "scifi");
+		case 65:
+			return new Movie("The Silence Of The Lambs", "horror");
+		case 66:
+			return new Movie("Network", "drama");
+		case 67:
+			return new Movie("The Manchurian Candidate", "drama");
+		case 68:
+			return new Movie("An American In Paris", "drama");
+		case 69:
+			return new Movie("Shane", "drama");
+		case 70:
+			return new Movie("The French Connection", "drama");
+		case 71:
+			return new Movie("Forrest Gump", "drama");
+		case 72:
+			return new Movie("Ben-Hur", "drama");
+		case 73:
+			return new Movie("Wuthering Heights", "drama");
+		case 74:
+			return new Movie("The Gold Rush", "drama");
+		case 75:
+			return new Movie("Dances With Wolves", "drama");
+		case 76:
+			return new Movie("City Lights", "drama");
+		case 77:
+			return new Movie("American Graffiti", "drama");
+		case 78:
+			return new Movie("Rocky", "drama");
+		case 79:
+			return new Movie("The Deer Hunter", "drama");
+		case 80:
+			return new Movie("The Wild Bunch", "drama");
+		case 81:
+			return new Movie("Modern Times", "drama");
+		case 82:
+			return new Movie("Giant", "drama");
+		case 83:
+			return new Movie("Platoon", "drama");
+		case 84:
+			return new Movie("Fargo", "drama");
+		case 85:
+			return new Movie("Duck Soup", "comedy");
+		case 86:
+			return new Movie("Mutiny On The Bounty", "drama");
+		case 87:
+			return new Movie("Frankenstein", "horror");
+		case 88:
+			return new Movie("Easy Rider", "drama");
+		case 89:
+			return new Movie("Patton", "drama");
+		case 90:
+			return new Movie("The Jazz Singer", "drama");
+		case 91:
+			return new Movie("My Fair Lady", "musical");
+		case 92:
+			return new Movie("A Place In The Sun", "drama");
+		case 93:
+			return new Movie("The Apartment", "drama");
+		case 94:
+			return new Movie("Goodfellas", "drama");
+		case 95:
+			return new Movie("Pulp Fiction", "drama");
+		case 96:
+			return new Movie("The Searchers", "drama");
+		case 97:
+			return new Movie("Bringing Up Baby", "drama");
+		case 98:
+			return new Movie("Unforgiven", "drama");
+		case 99:
+			return new Movie("Guess Who's Coming To Dinner", "drama");
+		case 100:
+			return new Movie("Yankee Doodle Dandy", "musical");
+		default:
+			return new Movie("NO SUCH MOVIE", "");
+		}
 	}
 
 }
