@@ -19,7 +19,6 @@ public class Movie {
 
 		Scanner scnr = new Scanner(System.in);
 		int userEntry;
-		String yesNo;
 		boolean loopAgain = true;
 
 		System.out.println("Welcome to the Movie List Application!" + "\n");
